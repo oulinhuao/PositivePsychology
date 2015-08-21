@@ -1,0 +1,397 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff5"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        
+        <ImageView
+            android:id="@+id/img_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:maxWidth="10000dp"
+            android:maxHeight="10000dp"
+            android:src="@drawable/main_title" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@null"
+                android:src="@drawable/head" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="超人的超" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical" >
+
+            
+            <TextView
+	            android:id="@+id/imageView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:gravity="center"
+	            android:text="6"
+	            android:textColor="@color/title"
+	            android:background="@drawable/btn_msg_bg" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_mailbox" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.kingdon.view.MyScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.kingdon.view.MyLinnearLayout
+                android:id="@+id/layout_pingce"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_pingce"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="2"
+	                android:layout_height="match_parent" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+	            <RelativeLayout 
+	                android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+	                >
+	                
+	                <ImageView
+		                android:id="@+id/view_img_pingce"
+			            android:layout_width="match_parent"
+			            android:layout_height="match_parent"
+			            android:contentDescription="@null"
+			            android:adjustViewBounds="true"
+			            android:maxWidth="10000dp"
+			            android:maxHeight="10000dp"
+			            android:src="@drawable/main_pengce_txt" />
+	                
+	                <com.kingdon.view.indicator.CirclePageIndicator
+	                    android:layout_centerHorizontal="true"
+		                android:id="@+id/view_img_pingce_i"
+	                    android:layout_alignBottom="@id/view_img_pingce"
+	                    android:layout_marginBottom="6dp"
+				        android:padding="4dp"
+				        android:layout_height="wrap_content"
+				        android:layout_width="wrap_content"
+				        />
+	            </RelativeLayout>
+            </com.kingdon.view.MyLinnearLayout>
+            
+            
+            <!-- 学习 -->
+            <com.kingdon.view.MyLinnearLayout
+                android:id="@+id/layout_study"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+	            
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_study"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="match_parent" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+	            
+                
+                <RelativeLayout 
+	                android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+	                >
+	                
+	                <ImageView
+		                android:id="@+id/view_img_study"
+			            android:layout_width="match_parent"
+			            android:layout_height="match_parent"
+			            android:contentDescription="@null"
+			            android:scaleType="fitXY"
+			            android:src="@drawable/main_study_text" />
+	                
+	                <com.kingdon.view.indicator.CirclePageIndicator
+	                    android:layout_centerHorizontal="true"
+		                android:id="@+id/view_img_study_i"
+	                    android:layout_alignBottom="@id/view_img_study"
+	                    android:layout_marginBottom="6dp"
+				        android:padding="4dp"
+				        android:layout_height="wrap_content"
+				        android:layout_width="wrap_content"
+				        />
+	                
+	            </RelativeLayout>
+                
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_study_right"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="match_parent" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+	            
+            </com.kingdon.view.MyLinnearLayout>
+            
+            
+            <!-- 提升 -->
+            <com.kingdon.view.MyLinnearLayout
+                android:id="@+id/layout_tisheng"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                
+                <RelativeLayout 
+	                android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+	                >
+	                
+	                <ImageView
+		                android:id="@+id/view_img_tisheng"
+			            android:layout_width="match_parent"
+			            android:layout_height="match_parent"
+			            android:contentDescription="@null"
+			            android:scaleType="fitXY"
+			            android:src="@drawable/main_tisheng_text" />
+	                
+	                <com.kingdon.view.indicator.CirclePageIndicator
+	                    android:layout_centerHorizontal="true"
+		                android:id="@+id/view_img_tisheng_i"
+	                    android:layout_alignBottom="@id/view_img_tisheng"
+	                    android:layout_marginBottom="6dp"
+				        android:padding="4dp"
+				        android:layout_height="wrap_content"
+				        android:layout_width="wrap_content"
+				        />
+	                
+	            </RelativeLayout>
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_tisheng"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_tisheng_right"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+            </com.kingdon.view.MyLinnearLayout>
+            
+            
+            <!-- 交流 -->
+            <com.kingdon.view.MyLinnearLayout
+                android:id="@+id/layout_comm"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_comm"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+	            
+	            <RelativeLayout 
+	                android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+	                >
+	                
+	                <ImageView
+		                android:id="@+id/view_img_comm"
+			            android:layout_width="match_parent"
+			            android:layout_height="match_parent"
+			            android:contentDescription="@null"
+			            android:scaleType="fitXY"
+			            android:src="@drawable/main_comm_text" />
+	                
+	                <com.kingdon.view.indicator.CirclePageIndicator
+	                    android:layout_centerHorizontal="true"
+		                android:id="@+id/view_img_comm_i"
+	                    android:layout_alignBottom="@id/view_img_comm"
+	                    android:layout_marginBottom="6dp"
+				        android:padding="4dp"
+				        android:layout_height="wrap_content"
+				        android:layout_width="wrap_content"
+				        />
+	                
+	            </RelativeLayout>
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_comm_right"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+            </com.kingdon.view.MyLinnearLayout>
+            
+            
+            <!-- 教练 -->
+            <com.kingdon.view.MyLinnearLayout
+                android:id="@+id/layout_jiao"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_jiao"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+                <com.kingdon.view.loopviewpager.LoopViewPager
+	                android:id="@+id/view_jiao_right"
+	                android:fadingEdge="none"
+	                android:fadeScrollbars="false"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
+	                android:layout_height="wrap_content" >
+	            </com.kingdon.view.loopviewpager.LoopViewPager>
+	            <RelativeLayout 
+	                android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+	                >
+	                
+	                <ImageView
+		                android:id="@+id/view_img_jiao"
+			            android:layout_width="match_parent"
+			            android:layout_height="match_parent"
+			            android:contentDescription="@null"
+			            android:scaleType="fitXY"
+			            android:src="@drawable/main_jiao_txt" />
+	                
+	                <com.kingdon.view.indicator.CirclePageIndicator
+	                    android:layout_centerHorizontal="true"
+		                android:id="@+id/view_img_jiao_i"
+	                    android:layout_alignBottom="@id/view_img_jiao"
+	                    android:layout_marginBottom="6dp"
+				        android:padding="4dp"
+				        android:layout_height="wrap_content"
+				        android:layout_width="wrap_content"
+				        />
+	            </RelativeLayout>
+            </com.kingdon.view.MyLinnearLayout>
+
+            
+        </LinearLayout>
+    </com.kingdon.view.MyScrollView>
+    
+    
+    <RadioGroup
+        android:id="@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp" >
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_main"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:drawableTop="@drawable/menu_home_bg"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_ask"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_friend_bg"
+            android:text="好友" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_quanzi"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_task_bg"
+            android:text="任务" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_mine"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_res_bg"
+            android:text="资源" />
+    </RadioGroup>
+
+
+</LinearLayout>
