@@ -134,7 +134,7 @@ public class MainActivity extends MyBaseActivity {
             mScroller.setAccessible(true); 
             ViewPagerScroller scroller = new ViewPagerScroller(vp.getContext());
             mScroller.set(vp,scroller);
-            scroller.setScrollDuration(1000);
+            scroller.setScrollDuration(200);// 系统默认是250
         }catch(NoSuchFieldException e){
         }catch (IllegalArgumentException e){
         }catch (IllegalAccessException e){
@@ -240,7 +240,7 @@ public class MainActivity extends MyBaseActivity {
 		mIndicator.setFillColor(0xffffffff);
 		mIndicator.setStrokeColor(0xffffffff);
 		mIndicator.setStrokeWidth(0);
-		mIndicator.setPageColor(0xaaffffff);
+		mIndicator.setPageColor(0x55ffffff);
 	}
 
 	@Override
@@ -248,7 +248,8 @@ public class MainActivity extends MyBaseActivity {
 		mLayoutPingce.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				return mViewPingce.onTouchEvent(event);
+				mViewPingce.onTouchEvent(event);
+				return true;
 			}
 		});
 		mLayoutStudy.setOnTouchListener(new OnTouchListener() {
@@ -284,7 +285,6 @@ public class MainActivity extends MyBaseActivity {
 			}
 		});
 		
-		mLayoutStudy.onInterceptTouchEvent(null);
 	}
 	
 //	resizeLayout(mLayoutPingce,0.9795F);//0.9795F
