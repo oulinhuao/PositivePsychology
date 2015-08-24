@@ -7,11 +7,20 @@ import butterknife.InjectView;
 
 import com.kingdon.kdmsp.tool.LogHelper;
 import com.kingdon.positivepsychology.adapter.MyPagerAdapter;
+import com.kingdon.positivepsychology.interfaces.ILayoutClickListener;
 import com.kingdon.preferences.PreferencesCommon;
 import com.kingdon.util.ImageHelper;
+import com.kingdon.view.MyLinnearLayout;
 import com.kingdon.view.ViewPagerScroller;
 import com.kingdon.view.indicator.CirclePageIndicator;
 import com.kingdon.view.loopviewpager.LoopViewPager;
+import com.kingdon.viewpagereffect.AccordionTransformer;
+import com.kingdon.viewpagereffect.CubeTransformer;
+import com.kingdon.viewpagereffect.DepthPageTransformer;
+import com.kingdon.viewpagereffect.InRightDownTransformer;
+import com.kingdon.viewpagereffect.InRightUpTransformer;
+import com.kingdon.viewpagereffect.RotateTransformer;
+import com.kingdon.viewpagereffect.ZoomOutPageTransformer;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import android.os.Bundle;
@@ -30,30 +39,30 @@ public class MainActivity extends MyBaseActivity {
 	@InjectView(R.id.relativeLayout1) RelativeLayout mLayoutTitle;
 	
 	// 评测
-	@InjectView(R.id.layout_pingce) LinearLayout mLayoutPingce;
+	@InjectView(R.id.layout_pingce) MyLinnearLayout mLayoutPingce;
 	@InjectView(R.id.view_pingce) LoopViewPager mViewPingce;
 	@InjectView(R.id.view_img_pingce) ImageView mViewImgPingce;
 	
 	// 学习
-	@InjectView(R.id.layout_study) LinearLayout mLayoutStudy;
+	@InjectView(R.id.layout_study) MyLinnearLayout mLayoutStudy;
 	@InjectView(R.id.view_study) LoopViewPager mViewStudy;
 	@InjectView(R.id.view_study_right) LoopViewPager mViewStudyRight;
 	@InjectView(R.id.view_img_study) ImageView mViewImgStudy;
 	
 	// 提升
-	@InjectView(R.id.layout_tisheng) LinearLayout mLayoutTishen;
+	@InjectView(R.id.layout_tisheng) MyLinnearLayout mLayoutTishen;
 	@InjectView(R.id.view_tisheng) LoopViewPager mViewTishen;
 	@InjectView(R.id.view_tisheng_right) LoopViewPager mViewTishenRight;
 	@InjectView(R.id.view_img_tisheng) ImageView mViewImgTishen;
  	
 	// 交流
-	@InjectView(R.id.layout_comm) LinearLayout mLayoutComm;
+	@InjectView(R.id.layout_comm) MyLinnearLayout mLayoutComm;
 	@InjectView(R.id.view_comm) LoopViewPager mViewComm;
 	@InjectView(R.id.view_comm_right) LoopViewPager mViewCommRight;
 	@InjectView(R.id.view_img_comm) ImageView mViewImgComm;
 	
 	// 教练
-	@InjectView(R.id.layout_jiao) LinearLayout mLayoutJiao;
+	@InjectView(R.id.layout_jiao) MyLinnearLayout mLayoutJiao;
 	@InjectView(R.id.view_jiao) LoopViewPager mViewJiao;
 	@InjectView(R.id.view_jiao_right) LoopViewPager mViewJiaoRight;
 	@InjectView(R.id.view_img_jiao) ImageView mViewImgJiao;
@@ -119,11 +128,14 @@ public class MainActivity extends MyBaseActivity {
 		setIndicator(mIndicatorComm,mViewComm);
 		setIndicator(mIndicatorJiao,mViewJiao);
 		
+		mViewPingce.setPageTransformer(true, new CubeTransformer());
+		mViewStudy.setPageTransformer(true, new DepthPageTransformer());
+		mViewStudyRight.setPageTransformer(true, new RotateTransformer());
+		mViewTishen.setPageTransformer(true, new AccordionTransformer());
+		mViewTishenRight.setPageTransformer(true, new InRightUpTransformer());
+		mViewComm.setPageTransformer(true, new InRightDownTransformer());
+		mViewCommRight.setPageTransformer(true, new ZoomOutPageTransformer());
 		
-//		setResize(mViewImgStudy);
-//		setResize(mViewImgTishen);
-//		setResize(mViewImgComm);
-//		setResize(mViewImgJiao);
 		
 	}
 	
@@ -190,7 +202,7 @@ public class MainActivity extends MyBaseActivity {
 	 * @param _LoopViewPager 
 	 * @author Tony
 	 */
-	private void initViewPagers(int imgRes,View layout,LoopViewPager _LoopViewPager){
+	private void initViewPagers(int imgRes,View layout,ViewPager _LoopViewPager){
 		_LoopViewPager.setAdapter(getMyPagerAdapter(imgRes));
 		_LoopViewPager.setPageMargin(0);
 		initViewPagerScroll(_LoopViewPager);
@@ -206,7 +218,7 @@ public class MainActivity extends MyBaseActivity {
 	}
 	
 	private MyPagerAdapter getMyPagerAdapter(int imgRes){
-		int count = 3;
+		int count = 6;
 		ImageView[] imgs = new ImageView[count];
 		for(int i = 0;i < count;i++){
 			if(imgs[i] == null){
@@ -231,7 +243,7 @@ public class MainActivity extends MyBaseActivity {
 	 * @param mViewPager
 	 * @author Tony
 	 */
-	private void setIndicator(CirclePageIndicator mIndicator,LoopViewPager mViewPager){
+	private void setIndicator(CirclePageIndicator mIndicator,ViewPager mViewPager){
 		mIndicator.setViewPager(mViewPager);
 		mIndicator.setSnap(false);
 		final float density = mContext.getResources().getDisplayMetrics().density;
@@ -285,6 +297,20 @@ public class MainActivity extends MyBaseActivity {
 			}
 		});
 		
+		mLayoutPingce.setOnLayoutClickListener(new ILayoutClickListener() {
+			
+			@Override
+			public void onClicked(int index) {
+				if(index == 2){// 点击右侧
+					goPingce();
+				}else{// 点击左侧
+					
+				}
+				
+			}
+		});
+		
+		
 	}
 	
 //	resizeLayout(mLayoutPingce,0.9795F);//0.9795F
@@ -292,17 +318,34 @@ public class MainActivity extends MyBaseActivity {
 //	resizeLayout(mLayoutTishen,0.8197F);
 //	resizeLayout(mLayoutComm,1F);
 //	resizeLayout(mLayoutJiao,0.8691F);
-	private void resizeLayout(LinearLayout layout,float res){
-		layout.getLayoutParams().height = (int)(
-				GlobalConfig.getScreenWidth(mContext) / 
-				res / 3);
-	}
+//	private void resizeLayout(LinearLayout layout,float res){
+//		layout.getLayoutParams().height = (int)(
+//				GlobalConfig.getScreenWidth(mContext) / 
+//				res / 3);
+//	}
 	int i = 0;
 	private void resizeLayout(LinearLayout layout,int res){
-		LogHelper.customLogging("laisadf");
 		i++;
 		layout.getLayoutParams().height = (int)(
 				GlobalConfig.getScreenWidth(mContext) / 
 				ImageHelper.getResRatio(mContext, res) / 3);
+	}
+	
+	
+//	@OnTouch(R.id.view_img_pingce)
+//	protected boolean touchPingce(){
+//		LogHelper.customLogging("goPingce");
+//		return false;
+//		
+//	}
+	
+	
+	/**
+	 * 打开评测模块（点击评测文字处）
+	 * @author Tony
+	 */
+	protected void goPingce(){
+		LogHelper.customLogging("goPingce");
+		
 	}
 }

@@ -95,7 +95,6 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-                
                 <com.kingdon.view.loopviewpager.LoopViewPager
 	                android:id="@+id/view_pingce"
 	                android:fadingEdge="none"

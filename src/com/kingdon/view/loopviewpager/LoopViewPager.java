@@ -189,5 +189,5 @@ public class LoopViewPager extends ViewPager {
             }
         }
     };
-
+    
 }
