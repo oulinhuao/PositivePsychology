@@ -17,9 +17,9 @@ import com.kingdon.view.loopviewpager.LoopViewPager;
 import com.kingdon.viewpagereffect.AccordionTransformer;
 import com.kingdon.viewpagereffect.CubeTransformer;
 import com.kingdon.viewpagereffect.DepthPageTransformer;
+import com.kingdon.viewpagereffect.FlipHorizontalTransformer;
 import com.kingdon.viewpagereffect.InRightDownTransformer;
 import com.kingdon.viewpagereffect.InRightUpTransformer;
-import com.kingdon.viewpagereffect.RotateTransformer;
 import com.kingdon.viewpagereffect.ZoomOutPageTransformer;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -30,7 +30,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -128,9 +127,11 @@ public class MainActivity extends MyBaseActivity {
 		setIndicator(mIndicatorComm,mViewComm);
 		setIndicator(mIndicatorJiao,mViewJiao);
 		
-		mViewPingce.setPageTransformer(true, new CubeTransformer());
+		
+		mViewPingce.setPageTransformer(false, new FlipHorizontalTransformer());
+//		mViewPingce.setPageTransformer(false, new RotateTransformer());
 		mViewStudy.setPageTransformer(true, new DepthPageTransformer());
-		mViewStudyRight.setPageTransformer(true, new RotateTransformer());
+		mViewStudyRight.setPageTransformer(true, new CubeTransformer());
 		mViewTishen.setPageTransformer(true, new AccordionTransformer());
 		mViewTishenRight.setPageTransformer(true, new InRightUpTransformer());
 		mViewComm.setPageTransformer(true, new InRightDownTransformer());
@@ -202,7 +203,7 @@ public class MainActivity extends MyBaseActivity {
 	 * @param _LoopViewPager 
 	 * @author Tony
 	 */
-	private void initViewPagers(int imgRes,View layout,ViewPager _LoopViewPager){
+	private void initViewPagers(int imgRes,View layout,LoopViewPager _LoopViewPager){
 		_LoopViewPager.setAdapter(getMyPagerAdapter(imgRes));
 		_LoopViewPager.setPageMargin(0);
 		initViewPagerScroll(_LoopViewPager);
@@ -219,22 +220,11 @@ public class MainActivity extends MyBaseActivity {
 	
 	private MyPagerAdapter getMyPagerAdapter(int imgRes){
 		int count = 6;
-		ImageView[] imgs = new ImageView[count];
+		int[] imgs = new int[count];
 		for(int i = 0;i < count;i++){
-			if(imgs[i] == null){
-				imgs[i] = new ImageView(mContext);
-				imgs[i].setImageResource(imgRes);
-				imgs[i].setScaleType(ScaleType.FIT_XY);
-				setResize(imgs[i]);
-			}
+			imgs[i] = imgRes;
 		}
 		return new MyPagerAdapter(mContext,imgs);
-	}
-	
-	private void setResize(ImageView iv){
-//		iv.setAdjustViewBounds(true);
-//		iv.setMaxHeight(1000000);
-//		iv.setMaxWidth(1000000);
 	}
 	
 	/**

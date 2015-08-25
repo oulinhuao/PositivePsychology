@@ -2,16 +2,16 @@ package com.kingdon.positivepsychology.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 public class MyPagerAdapter extends PagerAdapter {
 	private Context mContext;
-	private int mSize = 0;
 	
 	/**缓存页面集合*/
-	private View[] mViews;
+	private int[] mViews;
 	/** 总页数 */
 	private int mAllCount;
 	/***
@@ -23,17 +23,11 @@ public class MyPagerAdapter extends PagerAdapter {
 		return mAllCount;
 	}
 	
-	private LayoutInflater mLayoutInflater;
-	
 	public MyPagerAdapter(Context c,
-			View[] _mViews) {
+			int[] _mViews) {
 		this.mContext = c;
 		this.mViews = _mViews;
-		this.mSize = _mViews != null ? _mViews.length : 0;
-		this.mAllCount = mSize;
-		
-		this.mLayoutInflater = LayoutInflater.from(c);
-		
+		this.mAllCount = _mViews == null ? 0 : _mViews.length;
 	}
 	
 	/**
@@ -43,8 +37,12 @@ public class MyPagerAdapter extends PagerAdapter {
 	 * @author Tony
 	 * @date 2015年5月5日 上午10:45:49
 	 */
-	private View getViewPaged(final int index){
-		return mViews[index];
+	private View getViewPaged(int index){
+		ImageView img = new ImageView(mContext);
+		img = new ImageView(mContext);
+		img.setImageResource(mViews[index]);
+		img.setScaleType(ScaleType.FIT_XY);
+		return img;
 	}
 	
 	@Override
@@ -55,7 +53,6 @@ public class MyPagerAdapter extends PagerAdapter {
 	@Override
 	public Object instantiateItem(ViewGroup arg0, int position) {
 		View v = getViewPaged(position);
-		arg0.removeView(v);
 		arg0.addView(v);
 		return v;
 	}
@@ -67,5 +64,6 @@ public class MyPagerAdapter extends PagerAdapter {
 	
 	@Override
 	public void destroyItem(ViewGroup arg0, int arg1, Object arg2) {
+		arg0.removeView((View)arg2);
 	}
 }

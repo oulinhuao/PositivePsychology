@@ -5,7 +5,7 @@ import com.nineoldandroids.view.ViewHelper;
 import android.support.v4.view.ViewPager.PageTransformer;
 import android.view.View;
 
-public class CubeTransformer implements PageTransformer {
+public class FlipHorizontalTransformer implements PageTransformer {
 	
 	/**
 	 * position参数指明给定页面相对于屏幕中心的位置。它是一个动态属性，
@@ -20,16 +20,29 @@ public class CubeTransformer implements PageTransformer {
 	public void transformPage(View view, float position) {
 		if (position <= 0) {
 			//从右向左滑动为当前View
-			//设置旋转中心点
-			ViewHelper.setPivotX(view, view.getMeasuredWidth());
-			ViewHelper.setPivotY(view, view.getMeasuredHeight() * 0.5f);
-			//只在Y轴做旋转操作
-			ViewHelper.setRotationY(view, 90f * position);
+			if (position < -0.5f) {// 到一半
+				view.setVisibility(View.INVISIBLE);
+			} else {
+				if (view.getVisibility() == View.INVISIBLE)
+					view.setVisibility(View.VISIBLE);
+				ViewHelper.setPivotX(view, view.getMeasuredWidth()*0.5f);
+				ViewHelper.setPivotY(view, view.getMeasuredHeight()*0.5f);
+				ViewHelper.setTranslationX(view, - view.getMeasuredWidth() * position);
+				ViewHelper.setRotationY(view, 180.0f * position);
+			}
 		} else if (position <= 1) {
 			//从左向右滑动为当前View
-			ViewHelper.setPivotX(view, 0);
-			ViewHelper.setPivotY(view, view.getMeasuredHeight() * 0.5f);
-			ViewHelper.setRotationY(view, 90f * position);
+			if (position > 0.5f) {
+				view.setVisibility(View.INVISIBLE);
+			} else {
+				if (view.getVisibility() == View.INVISIBLE)
+					view.setVisibility(View.VISIBLE);
+				ViewHelper.setPivotX(view, view.getMeasuredWidth()*0.5f);
+				ViewHelper.setPivotY(view, view.getMeasuredHeight()*0.5f);
+				ViewHelper.setTranslationX(view, -view.getMeasuredWidth() * position);
+				ViewHelper.setRotationY(view, 180.0f * position);
+			}
 		}
+		
 	}
 }

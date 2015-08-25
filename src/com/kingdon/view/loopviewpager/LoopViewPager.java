@@ -20,13 +20,14 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * A ViewPager subclass enabling infinte scrolling of the viewPager elements
  * 
  * When used for paginating views (in opposite to fragments), no code changes
  * should be needed only change xml's from <android.support.v4.view.ViewPager>
- * to <com.imbryk.viewPager.LoopViewPager>
+ * to <com.tracy.viewPager.LoopViewPager>
  * 
  * If "blinking" can be seen when paginating to first or last view, simply call
  * seBoundaryCaching( true ), or change DEFAULT_BOUNDARY_CASHING to true
@@ -42,11 +43,36 @@ import android.util.AttributeSet;
  */
 public class LoopViewPager extends ViewPager {
 
-    private static final boolean DEFAULT_BOUNDARY_CASHING = false;
+    private static final boolean DEFAULT_BOUNDARY_CASHING = true;
 
     OnPageChangeListener mOuterPageChangeListener;
     private LoopPagerAdapterWrapper mAdapter;
     private boolean mBoundaryCaching = DEFAULT_BOUNDARY_CASHING;
+    private boolean isCanScroll = true;
+
+    public boolean isCanScroll() {
+        return isCanScroll;
+    }
+
+    public void setCanScroll(boolean isCanScroll) {
+        this.isCanScroll = isCanScroll;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if(isCanScroll)
+            return super.onTouchEvent(ev);
+        else
+            return false;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(isCanScroll)
+            return super.onInterceptTouchEvent(ev);
+        else
+            return false;
+    }
     
     
     /**
@@ -84,7 +110,12 @@ public class LoopViewPager extends ViewPager {
         mAdapter = new LoopPagerAdapterWrapper(adapter);
         mAdapter.setBoundaryCaching(mBoundaryCaching);
         super.setAdapter(mAdapter);
-        setCurrentItem(0, false);
+        //fix blinking issue when item is scrolling from first to last,cause ViewPager instance item left current right at least,see more at setOffScreenLimit()
+        setCurrentItem(mAdapter.getRealCount(), false);
+        //disable scroll when realCount<2
+        if(mAdapter.getRealCount()<2){
+            setCanScroll(false);
+        }
     }
 
     @Override
@@ -189,5 +220,5 @@ public class LoopViewPager extends ViewPager {
             }
         }
     };
-    
+
 }

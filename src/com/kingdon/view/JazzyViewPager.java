@@ -13,9 +13,11 @@ import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.kingdon.kdmsp.tool.LogHelper;
 import com.kingdon.positivepsychology.R;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -26,10 +28,8 @@ public class JazzyViewPager extends ViewPager {
 	private boolean mEnabled = true;
 	private boolean mFadeEnabled = false;
 	private boolean mOutlineEnabled = false;
-	private boolean mDisableHardwareLayer = true;
-	private int  mAllCount = 0;
 	public static int sOutlineColor = Color.WHITE;
-	private TransitionEffect mEffect = TransitionEffect.ZoomIn;
+	private TransitionEffect mEffect = TransitionEffect.Standard;
 	
 	private HashMap<Integer, Object> mObjs = new LinkedHashMap<Integer, Object>();
 
@@ -67,9 +67,8 @@ public class JazzyViewPager extends ViewPager {
 		setClipChildren(false);
 		// now style everything!
 		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.JazzyViewPager);
-		int effect = ta.getInt(R.styleable.JazzyViewPager_style, 1);
-		if (isInEditMode()) { return; }
-		String[] transitions = context.getResources().getStringArray(R.array.jazzy_effects);
+		int effect = ta.getInt(R.styleable.JazzyViewPager_style, 0);
+		String[] transitions = getResources().getStringArray(R.array.jazzy_effects);
 		setTransitionEffect(TransitionEffect.valueOf(transitions[effect]));
 		setFadeEnabled(ta.getBoolean(R.styleable.JazzyViewPager_fadeEnabled, false));
 		setOutlineEnabled(ta.getBoolean(R.styleable.JazzyViewPager_outlineEnabled, false));
@@ -84,11 +83,6 @@ public class JazzyViewPager extends ViewPager {
 
 	public void setTransitionEffect(TransitionEffect effect) {
 		mEffect = effect;
-//		reset();
-	}
-	
-	public void setAllCount(int count) {
-		mAllCount = count;
 //		reset();
 	}
 
@@ -107,16 +101,6 @@ public class JazzyViewPager extends ViewPager {
 	public void setOutlineEnabled(boolean enabled) {
 		mOutlineEnabled = enabled;
 		wrapWithOutlines();
-	}
-	/**
-	 * 设定是否启用硬件加速控制
-	 * 每日一禅中false，否则会影响page的竖向滑动
-	 * @param enabled
-	 * @author Tony
-	 * @date 2014年8月30日 下午8:53:33
-	 */
-	public void setDisableHardwareLayer(boolean enabled) {
-		mDisableHardwareLayer = enabled;
 	}
 
 	public void setOutlineColor(int color) {
@@ -217,17 +201,17 @@ public class JazzyViewPager extends ViewPager {
 //		logState(v, "Child " + i);
 //	}
 //}
-//
-//	private void logState(View v, String title) {
-//		Log.v(TAG, title + ": ROT (" + ViewHelper.getRotation(v) + ", " +
-//				ViewHelper.getRotationX(v) + ", " +
-//				ViewHelper.getRotationY(v) + "), TRANS (" +
-//				ViewHelper.getTranslationX(v) + ", " +
-//				ViewHelper.getTranslationY(v) + "), SCALE (" +
-//				ViewHelper.getScaleX(v) + ", " + 
-//				ViewHelper.getScaleY(v) + "), ALPHA " +
-//				ViewHelper.getAlpha(v));
-//	}
+
+	private void logState(View v, String title) {
+		Log.v(TAG, title + ": ROT (" + ViewHelper.getRotation(v) + ", " +
+				ViewHelper.getRotationX(v) + ", " +
+				ViewHelper.getRotationY(v) + "), TRANS (" +
+				ViewHelper.getTranslationX(v) + ", " +
+				ViewHelper.getTranslationY(v) + "), SCALE (" +
+				ViewHelper.getScaleX(v) + ", " + 
+				ViewHelper.getScaleY(v) + "), ALPHA " +
+				ViewHelper.getAlpha(v));
+	}
 
 	protected void animateScroll(int position, float positionOffset) {
 		if (mState != State.IDLE) {
@@ -240,9 +224,7 @@ public class JazzyViewPager extends ViewPager {
 
 	protected void animateTablet(View left, View right, float positionOffset) {		
 		if (mState != State.IDLE) {
-//			LogHelper.customLogging("mState != State.IDLE");
 			if (left != null) {
-//				LogHelper.customLogging("left != null");
 				manageLayer(left, true);
 				mRot = 30.0f * positionOffset;
 				mTrans = getOffsetXForRotation(mRot, left.getMeasuredWidth(),
@@ -251,9 +233,9 @@ public class JazzyViewPager extends ViewPager {
 				ViewHelper.setPivotY(left, left.getMeasuredHeight()/2);
 				ViewHelper.setTranslationX(left, mTrans);
 				ViewHelper.setRotationY(left, mRot);
+				logState(left, "Left");
 			}
 			if (right != null) {
-//				LogHelper.customLogging("right != null");
 				manageLayer(right, true);
 				mRot = -30.0f * (1-positionOffset);
 				mTrans = getOffsetXForRotation(mRot, right.getMeasuredWidth(), 
@@ -262,7 +244,7 @@ public class JazzyViewPager extends ViewPager {
 				ViewHelper.setPivotY(right, right.getMeasuredHeight()*0.5f);
 				ViewHelper.setTranslationX(right, mTrans);
 				ViewHelper.setRotationY(right, mRot);
-				right.invalidate();
+				logState(right, "Right");
 			}
 		}
 	}
@@ -504,14 +486,6 @@ public class JazzyViewPager extends ViewPager {
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-		if (mAllCount > 0 && position >= mAllCount) {
-		    int newPosition = position%mAllCount;   
-		    position = newPosition;
-		}
-		if(position <0){
-			position = -position;
-		}
-		
 		if (mState == State.IDLE && positionOffset > 0) {
 			oldPage = getCurrentItem();
 			mState = position == oldPage ? State.GOING_RIGHT : State.GOING_LEFT;
@@ -523,13 +497,11 @@ public class JazzyViewPager extends ViewPager {
 			mState = State.GOING_RIGHT;
 
 		float effectOffset = isSmall(positionOffset) ? 0 : positionOffset;
-		if(mAllCount == 0){
-			mLeft = getChildAt(position);
-			mRight = getChildAt(position+1);
-		}else{
-			mLeft = findViewFromObject(position % mAllCount);
-			mRight = findViewFromObject((position+1 )% mAllCount);
-		}
+		
+//		mLeft = getChildAt(position);
+//		mRight = getChildAt(position+1);
+		mLeft = findViewFromObject(position);
+		mRight = findViewFromObject(position+1);
 		
 		if (mFadeEnabled)
 			animateFade(mLeft, mRight, effectOffset);
@@ -574,15 +546,12 @@ public class JazzyViewPager extends ViewPager {
 		}
 
 		super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-		// 调用这里会影响page中的竖向scrollview的滚动，每日一禅中做下特殊处理
-		if (effectOffset == 0 && mDisableHardwareLayer) {
+
+		if (effectOffset == 0) {
 			disableHardwareLayer();
 			mState = State.IDLE;
 		}
-//		if (effectOffset == 0) {
-//			disableHardwareLayer();
-//			mState = State.IDLE;
-//		}
+
 	}
 
 	private boolean isSmall(float positionOffset) {
