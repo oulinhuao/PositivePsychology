@@ -336,6 +336,6 @@ public class MainActivity extends MyBaseActivity {
 	 */
 	protected void goPingce(){
 		LogHelper.customLogging("goPingce");
-		
+		WebBrowerActivity.open(MainActivity.this, "file:///android_asset/PositivePsychology/page/testing.html");
 	}
 }

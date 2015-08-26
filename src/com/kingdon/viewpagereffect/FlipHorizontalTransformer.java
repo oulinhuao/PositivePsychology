@@ -19,7 +19,7 @@ public class FlipHorizontalTransformer implements PageTransformer {
 	@Override
 	public void transformPage(View view, float position) {
 		if (position <= 0) {
-			//从右向左滑动为当前View
+			//从右向左滑动
 			if (position < -0.5f) {// 到一半
 				view.setVisibility(View.INVISIBLE);
 			} else {
@@ -31,7 +31,7 @@ public class FlipHorizontalTransformer implements PageTransformer {
 				ViewHelper.setRotationY(view, 180.0f * position);
 			}
 		} else if (position <= 1) {
-			//从左向右滑动为当前View
+			//从左向右滑动
 			if (position > 0.5f) {
 				view.setVisibility(View.INVISIBLE);
 			} else {

@@ -5,6 +5,7 @@ import com.kingdon.util.BuildVersionUtil;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
