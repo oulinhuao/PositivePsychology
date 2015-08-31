@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 public class MyLinnearLayout extends LinearLayout {
 	/**单击间隔时间*/
-	final int d = 300;
+	final int d = 800;
 	
 	private ILayoutClickListener mILayoutClickListener;
 	/**

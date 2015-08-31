@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.kingdon.kdmsp.tool.LogHelper;
 import com.kingdon.positivepsychology.adapter.MyPagerAdapter;
 import com.kingdon.positivepsychology.interfaces.ILayoutClickListener;
 import com.kingdon.preferences.PreferencesCommon;
@@ -300,6 +299,23 @@ public class MainActivity extends MyBaseActivity {
 			}
 		});
 		
+		mLayoutTishen.setOnLayoutClickListener(new ILayoutClickListener() {
+			
+			@Override
+			public void onClicked(int index) {
+				switch(index){
+				case 0:// 点击左侧
+					goPromote();
+					break;
+				case 1:// 点击中间
+					break;
+				case 2:// 点击右侧
+					break;
+				}
+				
+			}
+		});
+		
 		
 	}
 	
@@ -335,7 +351,12 @@ public class MainActivity extends MyBaseActivity {
 	 * @author Tony
 	 */
 	protected void goPingce(){
-		LogHelper.customLogging("goPingce");
-		WebBrowerActivity.open(MainActivity.this, "file:///android_asset/PositivePsychology/page/testing.html");
+//		WebBrowerActivity.open(MainActivity.this, "file:///android_asset/PositivePsychology/page/testing.html");
+//		WebBrowerActivity.open(MainActivity.this, "http://www.helloweba.com/demo/fixedright/cssfixed.html");
+	}
+	
+	
+	protected void goPromote(){
+		WebBrowerActivity.open(MainActivity.this, "file:///android_asset/PositivePsychology/page/promote.html");
 	}
 }
