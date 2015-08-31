@@ -1,6 +1,9 @@
-package com.kingdon.positivepsychology;
+package com.kingdon.base;
 
 import com.kingdon.kdmsp.AppManager;
+import com.kingdon.positivepsychology.R;
+import com.kingdon.positivepsychology.R.color;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -140,6 +143,20 @@ public abstract class MyBaseActivity extends FragmentActivity {
 			intent.putExtras(bundle);
 		}
 		startActivity(intent);
+	}
+	
+	/**
+	 * 配置状态栏颜色
+	 * @param colorRes 颜色资源
+	 * @author Tony
+	 */
+	protected void setSystemBar(int colorRes){
+		//  布局跟节点下需要加上android:fitsSystemWindows="true"
+		// 这样整个界面才不会推到顶部
+		SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+		mTintManager.setStatusBarTintEnabled(true);
+		mTintManager.setNavigationBarTintEnabled(false);
+		mTintManager.setStatusBarTintResourceWithPadding(R.color.title);
 	}
 	
 	

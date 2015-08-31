@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:background="#f0efef"
+        android:padding="10dp"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/calendar_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_left_arrow" />
+
+        <TextView
+            android:id="@+id/calendar_txt_current"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#787878"
+            android:text="2015年9月" />
+
+        <ImageView
+            android:id="@+id/calendar_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_right_arrow" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#b9b9b9"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/icon_round_yellow"
+            android:layout_height="wrap_content"
+            android:text="心情极佳" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/icon_round_green"
+            android:layout_height="wrap_content"
+            android:text="小幸福" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/icon_round_blue"
+            android:layout_height="wrap_content"
+            android:text="忧郁了" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/icon_round_orange"
+            android:layout_height="wrap_content"
+            android:text="极度郁闷" />
+        
+    </LinearLayout>
+
+</LinearLayout>

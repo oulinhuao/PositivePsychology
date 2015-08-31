@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="promote_tab_focused">#fde4e8</color>
+    <color name="promote_tab_text_default">#6c6c6c</color>
+    <color name="promote_tab_text_focused">#de5f70</color>
+    <color name="promote_tab_line_focused">#dc5f6f</color>
+    
+    <color name="promote_base_color">#f3f3f3</color>
+    <color name="promote_title_red">#ed7881</color>
+    
+    
+
+</resources>

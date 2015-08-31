@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RadioGroup
+        android:id="@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp" >
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_main"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:drawableTop="@drawable/menu_home_bg"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_ask"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_friend_bg"
+            android:text="好友" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_quanzi"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_task_bg"
+            android:text="任务" />
+
+        <RadioButton
+            android:id="@+id/main_rdbtn_mine"
+            style="@style/button_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/menu_res_bg"
+            android:text="资源" />
+    </RadioGroup>
+
+</LinearLayout>

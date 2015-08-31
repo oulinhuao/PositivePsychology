@@ -1,11 +1,11 @@
 package com.kingdon.positivepsychology;
 
+import com.kingdon.base.MyBaseActivity;
 import com.kingdon.kdmsp.tool.LogHelper;
 import com.kingdon.util.BuildVersionUtil;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;

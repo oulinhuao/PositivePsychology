@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.kingdon.base.MyBaseActivity;
 import com.kingdon.positivepsychology.adapter.MyPagerAdapter;
 import com.kingdon.positivepsychology.interfaces.ILayoutClickListener;
 import com.kingdon.preferences.PreferencesCommon;
@@ -95,12 +96,6 @@ public class MainActivity extends MyBaseActivity {
 			PreferencesCommon.saveScreenInfo(mContext, 
 					mDisplayMetrics.widthPixels, mDisplayMetrics.heightPixels);
 		}
-		
-//		resizeLayout(mLayoutPingce,0.9795F);//0.9795F
-//		resizeLayout(mLayoutStudy,0.7407F);
-//		resizeLayout(mLayoutTishen,0.8197F);
-//		resizeLayout(mLayoutComm,1F);
-//		resizeLayout(mLayoutJiao,0.8691F);
 		
 		mLayoutTitle.getLayoutParams().height = (int)(
 				GlobalConfig.getScreenWidth(mContext) / 
@@ -318,17 +313,7 @@ public class MainActivity extends MyBaseActivity {
 		
 		
 	}
-	
-//	resizeLayout(mLayoutPingce,0.9795F);//0.9795F
-//	resizeLayout(mLayoutStudy,0.7407F);
-//	resizeLayout(mLayoutTishen,0.8197F);
-//	resizeLayout(mLayoutComm,1F);
-//	resizeLayout(mLayoutJiao,0.8691F);
-//	private void resizeLayout(LinearLayout layout,float res){
-//		layout.getLayoutParams().height = (int)(
-//				GlobalConfig.getScreenWidth(mContext) / 
-//				res / 3);
-//	}
+
 	int i = 0;
 	private void resizeLayout(LinearLayout layout,int res){
 		i++;
@@ -336,14 +321,6 @@ public class MainActivity extends MyBaseActivity {
 				GlobalConfig.getScreenWidth(mContext) / 
 				ImageHelper.getResRatio(mContext, res) / 3);
 	}
-	
-	
-//	@OnTouch(R.id.view_img_pingce)
-//	protected boolean touchPingce(){
-//		LogHelper.customLogging("goPingce");
-//		return false;
-//		
-//	}
 	
 	
 	/**
@@ -357,6 +334,6 @@ public class MainActivity extends MyBaseActivity {
 	
 	
 	protected void goPromote(){
-		WebBrowerActivity.open(MainActivity.this, "file:///android_asset/PositivePsychology/page/promote.html");
+		openActivity(PromoteActivity.class);;
 	}
 }

@@ -1,4 +1,8 @@
 <resources>
 
     
+    
+    <dimen name="size_20">20sp</dimen>
+    <dimen name="icon_round_size">16sp</dimen>
+    
 </resources>
